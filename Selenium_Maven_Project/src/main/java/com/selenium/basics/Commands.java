@@ -37,15 +37,51 @@ public void verifyuserinput()
 	WebElement reg=driver.findElement(By.id("register-button"));
 	reg.click();
 	
+	
 }
-	public static void main(String[] args) 
+
+public void verifyisselected()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demowebshop.tricentis.com/register");
+	WebElement genter_button=driver.findElement(By.id("gender-male"));
+	boolean radiomale=genter_button.isSelected();
+	System.out.println("Genter element before selected"+radiomale);
+	 genter_button .click();
+	 
+	
+	}
+public void verifyisenable() 
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demowebshop.tricentis.com/");
+	WebElement suscribebutton=driver.findElement(By.id("newsletter-subscribe-button"));
+	boolean issuscribebuttonenable=suscribebutton.isEnabled();
+	System.out.println("susscribe element is enable : "+issuscribebuttonenable);
+	driver.close();
+}
+public void verifyisdisplayed()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demowebshop.tricentis.com/");
+	WebElement votebutton=driver.findElement(By.id("vote-poll-1"));
+	boolean isvotedisplayed=votebutton.isDisplayed();
+	System.out.println("vote element is displayed : "+isvotedisplayed);
+	driver.close();
+}
+	
+public static void main(String[] args) 
 	{
-		//Commands obj=new Commands();
+		Commands obj=new Commands();
 		//obj.webelementcommands();
 		
-		Commands obj1=new Commands();
-		obj1.verifyuserinput();
-
+		//obj.verifyuserinput();
+        //obj.verifyisenable();
+		obj.verifyisdisplayed();
+		
 	}
 
 }
