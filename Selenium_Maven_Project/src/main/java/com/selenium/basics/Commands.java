@@ -46,11 +46,12 @@ public void verifyisselected()
 	driver.manage().window().maximize();
 	driver.get("https://demowebshop.tricentis.com/register");
 	WebElement genter_button=driver.findElement(By.id("gender-male"));
-	boolean radiomale=genter_button.isSelected();
-	System.out.println("Genter element before selected"+radiomale);
-	 genter_button .click();
-	 
-	
+	 boolean radiomale = genter_button.isSelected();
+	System.out.println("Genter element before selected :"+radiomale);
+	genter_button.click();
+	 boolean radiomale1 = genter_button.isSelected();
+	 System.out.println("Genter element after selected :"+radiomale1);
+	driver.close();
 	}
 public void verifyisenable() 
 {
@@ -77,10 +78,10 @@ public static void main(String[] args)
 	{
 		Commands obj=new Commands();
 		//obj.webelementcommands();
-		
+		obj.verifyisselected();
 		//obj.verifyuserinput();
         //obj.verifyisenable();
-		obj.verifyisdisplayed();
+		//obj.verifyisdisplayed();
 		
 	}
 
