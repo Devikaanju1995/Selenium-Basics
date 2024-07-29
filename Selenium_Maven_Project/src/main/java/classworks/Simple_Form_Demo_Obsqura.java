@@ -92,11 +92,6 @@ public void verifySimpleFormDemo()
 	Select select=new Select(select_option);
 	select.selectByVisibleText("Green");
 	
-	//WebElement getfirstselectfield=driver.findElement(By.xpath("//button[text()='Get First Selected']"));
-	//Select select1=new Select(getfirstselectfield);
-	//List<WebElement>droplist=select1.getOptions();
-	//select1.getFirstSelectedOption();
-	//getfirstselectfield.click();
 	
 	
 	
