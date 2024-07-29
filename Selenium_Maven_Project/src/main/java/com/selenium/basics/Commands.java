@@ -1,8 +1,11 @@
 package com.selenium.basics;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 public class Commands
 {
 public void webelementcommands()
@@ -73,15 +76,39 @@ public void verifyisdisplayed()
 	System.out.println("vote element is displayed : "+isvotedisplayed);
 	driver.close();
 }
+
+
+public void verifyValuesFromDropDown()
+{
+	WebDriver driver =new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demo.guru99.com/test/newtours/register.php");
+	WebElement countryfield=driver.findElement(By.xpath("//select[@name='country']"));
+	Select select=new Select(countryfield);
+	select.selectByVisibleText("ARUBA");
+}
+public void getTotalDropDownValue()
+{
+	WebDriver driver =new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demo.guru99.com/test/newtours/register.php");
+	WebElement countryfield=driver.findElement(By.xpath("//select[@name='country']"));
+	Select select=new Select(countryfield);
+	List <WebElement> dropdownlist=select.getOptions();
+	System.out.println(dropdownlist.size());
+	driver.close();
+}
 	
 public static void main(String[] args) 
 	{
 		Commands obj=new Commands();
 		//obj.webelementcommands();
-		obj.verifyisselected();
+		//obj.verifyisselected();
 		//obj.verifyuserinput();
         //obj.verifyisenable();
 		//obj.verifyisdisplayed();
+		//obj.verifyValuesFromDropDown();
+		obj.getTotalDropDownValue();
 		
 	}
 
