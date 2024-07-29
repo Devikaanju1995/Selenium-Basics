@@ -32,8 +32,8 @@ public void mouseactiondragout()
 	
     WebElement dragfield4=driver.findElement(By.xpath("//span[text()='Draggable n°4']"));
 	WebElement dropfield4=driver.findElement(By.id("mydropzone"));
-	   Actions action3=new Actions(driver);
-	    action3.dragAndDrop(dragfield4, dropfield4).build().perform();
+	Actions action3=new Actions(driver);
+	action3.dragAndDrop(dragfield4, dropfield4).build().perform();
 	
 	
 }
