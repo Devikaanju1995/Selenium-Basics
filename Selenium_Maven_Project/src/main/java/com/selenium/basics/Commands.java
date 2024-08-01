@@ -1,6 +1,10 @@
 package com.selenium.basics;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -156,7 +160,82 @@ WebDriver driver=new ChromeDriver();
 	Actions action=new Actions(driver);
 	action.dragAndDropBy(dragmefield, 150, 100).build().perform();
 }
-public static void main(String[] args) 
+
+public void verifykeyboardevent() throws AWTException
+{
+	WebDriver driver=new ChromeDriver();
+	driver.get("https://selenium.qabible.in/simple-form-demo.php");
+	driver.manage().window().maximize();
+	Robot robot=new Robot();
+	robot.keyPress(KeyEvent.VK_CONTROL);
+	robot.keyPress(KeyEvent.VK_T);
+	robot.keyRelease(KeyEvent.VK_CONTROL);
+	robot.keyRelease(KeyEvent.VK_T);
+	driver.close();
+}
+public void verifysimplealert()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demoqa.com/alerts");
+	WebElement simpleclickmebutton=driver.findElement(By.id("alertButton"));
+	simpleclickmebutton.click();
+	Alert alert=driver.switchTo().alert();
+	alert.accept();
+}
+public void verifyconfirmalert()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demoqa.com/alerts");
+	WebElement confirmclickmealert=driver.findElement(By.id("confirmButton"));
+	confirmclickmealert.click();
+	Alert alert=driver.switchTo().alert();
+	String message=alert.getText();
+	System.out.println("Alert message is "+message);
+	alert.dismiss();
+	WebElement alertmsg=driver.findElement(By.id("confirmResult"));
+	String mmsg=alertmsg.getText();
+	System.out.println("Message is" +mmsg);
+	driver.close();
+}
+public void verifypromptalert()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demoqa.com/alerts");
+	WebElement confirmclickmealert=driver.findElement(By.id("promtButton"));
+	confirmclickmealert.click();
+	Alert alert=driver.switchTo().alert();
+	alert.sendKeys("Anju");
+	alert.accept();
+	WebElement entermsg=driver.findElement(By.id("promptResult"));
+	String getentermsg=entermsg.getText();
+	System.out.println("Message is : " +getentermsg);
+	driver.close();
+	
+}
+public void verifyframes()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demoqa.com/frames");
+	List<WebElement> iframes=driver.findElements(By.tagName("iframe"));
+	int numberoftag=iframes.size();
+	System.out.println("Tags are : "+numberoftag);
+	//driver.switchTo().frame(0);
+	
+	//driver.switchTo().frame("frame1");
+	WebElement framesget=driver.findElement(By.id("frame1"));
+	driver.switchTo().frame(framesget);
+	WebElement frametext=driver.findElement(By.id("sampleHeading"));
+	String getframetext=frametext.getText();
+	System.out.println("text is : " +getframetext);
+	//driver.switchTo().defaultContent();
+	System.err.println(driver.getTitle());
+	driver.close();
+}
+public static void main(String[] args) throws AWTException 
 	{
 		Commands obj=new Commands();
 		//obj.webelementcommands();
@@ -170,7 +249,12 @@ public static void main(String[] args)
 		//obj.verifydoubleclick();
 		//obj.verifymouseover();
 		//obj.verifydraganddrop();
-		obj.verifydraganddropusingoffset();
+		//obj.verifydraganddropusingoffset();
+		//obj.verifykeyboardevent();
+		//obj.verifysimplealert();
+		//obj.verifyconfirmalert();
+		//obj.verifypromptalert();
+		obj.verifyframes();
 	}
 
 }
