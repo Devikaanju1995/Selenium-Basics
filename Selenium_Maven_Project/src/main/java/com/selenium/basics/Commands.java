@@ -2,7 +2,9 @@ package com.selenium.basics;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -235,6 +237,77 @@ public void verifyframes()
 	System.err.println(driver.getTitle());
 	driver.close();
 }
+public void verifymultiplewindowhandling()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demo.guru99.com/popup.php");
+	String parentwindowhandleid=driver.getWindowHandle();
+	System.out.println("Parent window handle id is : "+parentwindowhandleid);
+	WebElement clickherelink=driver.findElement(By.xpath("//a[text()='Click Here']"));
+	clickherelink.click();
+	//String childwindowhandleid=driver.getWindowHandle();
+	//System.out.println("Child window handle id is : "+childwindowhandleid);
+	Set<String> handleids=driver.getWindowHandles();
+	System.out.println(" window handle id is : "+handleids);
+	Iterator<String> values=handleids.iterator();
+	while(values.hasNext())
+	{
+		String currentid=values.next();
+		if(!currentid.equals(parentwindowhandleid))
+		{
+			driver.switchTo().window(currentid);
+			WebElement emailidfield=driver.findElement(By.xpath("//input[@name='emailid']"));
+			emailidfield.sendKeys("devika.123@gmail.com");
+			WebElement submitbutton=driver.findElement(By.xpath("//input[@name='btnLogin']"));
+			submitbutton.click();
+		}
+	}
+}
+
+public void verifydynamictable()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://money.rediff.com/indices/nse");
+	WebElement showmorelink=driver.findElement(By.id("showMoreLess"));
+	 showmorelink.click();
+	
+	 WebElement fulltable=driver.findElement(By.xpath("//table[@id='dataTable']"));
+	//System.out.println(fulltable.getText());  //full table
+	 
+	 WebElement tableonerow=driver.findElement(By.xpath("//table[@id='dataTable']/tbody/tr[2]"));
+	 System.out.println(tableonerow.getText()); //get particular row
+	 
+	 List<WebElement> rows=fulltable.findElements(By.tagName("tr"));
+	 int rowcount=rows.size();
+	 for(int i=0;i<rowcount;i++)
+	 {
+		 List<WebElement>columns=rows.get(i).findElements(By.tagName("td"));
+		 int columncount=columns.size();
+		 for(int j=0;j<columncount;j++)
+		 {
+			 String celldata=columns.get(j).getText();
+			 if(celldata.equals("NIFTY BANK"))
+			 {
+				 System.out.println("value is :" +columns.get(1).getText());
+			 }
+		 }
+	 }
+	 driver.close();
+}
+public void verifyfileupload()
+{
+	WebDriver driver=new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://demo.guru99.com/test/upload/");
+	WebElement choosefileoption=driver.findElement(By.xpath("//input[@id='uploadfile_0']"));
+	choosefileoption.sendKeys("C:\\Users\\Sathish\\git\\Selenium-Basics\\Selenium_Maven_Project\\src\\main\\resources");
+	WebElement checkboxtick=driver.findElement(By.id("terms"));
+	checkboxtick.click();
+	WebElement submitfilebutton=driver.findElement(By.id("submitbutton"));
+	submitfilebutton.click();
+}
 public static void main(String[] args) throws AWTException 
 	{
 		Commands obj=new Commands();
@@ -254,7 +327,10 @@ public static void main(String[] args) throws AWTException
 		//obj.verifysimplealert();
 		//obj.verifyconfirmalert();
 		//obj.verifypromptalert();
-		obj.verifyframes();
+		//obj.verifyframes();
+		//obj.verifymultiplewindowhandling();
+		//obj.verifydynamictable();
+		obj.verifyfileupload();
 	}
 
 }
