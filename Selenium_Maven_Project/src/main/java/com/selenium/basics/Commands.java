@@ -234,7 +234,7 @@ public void verifyframes()
 	String getframetext=frametext.getText();
 	System.out.println("text is : " +getframetext);
 	//driver.switchTo().defaultContent();
-	System.err.println(driver.getTitle());
+	System.out.println(driver.getTitle());
 	driver.close();
 }
 public void verifymultiplewindowhandling()
