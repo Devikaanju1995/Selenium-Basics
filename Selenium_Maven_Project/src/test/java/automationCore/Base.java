@@ -37,9 +37,9 @@ public void browserlaunch()
 {
 	initialisebrowser("chrome");  //this.method but this is inbuild
 }
-@AfterMethod
-public void closebrowser()
-{
-	driver.close();
-}
+//@AfterMethod
+//public void closebrowser()
+//{
+//	driver.close();
+//}
 }
