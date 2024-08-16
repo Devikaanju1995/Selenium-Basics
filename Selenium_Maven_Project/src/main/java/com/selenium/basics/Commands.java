@@ -58,6 +58,7 @@ public void verifyisselected()
 	WebElement genter_button=driver.findElement(By.id("gender-male"));
 	 boolean radiomale = genter_button.isSelected();
 	System.out.println("Genter element before selected :"+radiomale);
+	
 	genter_button.click();
 	 boolean radiomale1 = genter_button.isSelected();
 	 System.out.println("Genter element after selected :"+radiomale1);
