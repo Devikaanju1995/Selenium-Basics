@@ -51,7 +51,7 @@ public void closebrowser(ITestResult result) throws IOException
 	{
 		takescreenshot(result); //this.method
 	}
-	driver.close();
+	//driver.close();
 }
 public void takescreenshot(ITestResult result) throws IOException
 {
