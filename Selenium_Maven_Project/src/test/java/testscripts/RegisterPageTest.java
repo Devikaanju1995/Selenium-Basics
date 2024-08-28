@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import Utilities.Random_Data_Utility;
 import automationCore.Base;
 
 public class RegisterPageTest extends Base
@@ -16,20 +17,25 @@ public void verify_User_Registeration()
 		
 	driver.get("https://demowebshop.tricentis.com/register");
 	
+	String firstname=Random_Data_Utility.get_Firstname();
+	String lastname=Random_Data_Utility.get_Lastname();
+	String emailid=firstname+"."+lastname+"@yahoo.com";
+	String passsword=firstname+"@"+lastname;
+	String confirm_passsword=firstname+lastname;
 	
 	
 	WebElement gender_field=driver.findElement(By.id("gender-female"));
 	gender_field.click();
 	WebElement  first_name=driver.findElement(By.id("FirstName"));
-	first_name.sendKeys("Shynaa");
+	first_name.sendKeys(firstname);
 	WebElement last_name=driver.findElement(By.id("LastName"));
-	last_name.sendKeys("Satheesh");
+	last_name.sendKeys(lastname);
 	WebElement email_field=driver.findElement(By.id("Email"));
-	email_field.sendKeys("shynasatheesh1011@gmail.com");
+	email_field.sendKeys(emailid);
 	WebElement pass_field=driver.findElement(By.id("Password"));
-	pass_field.sendKeys("shynasatheesh1234");
+	pass_field.sendKeys(passsword);
 	WebElement confpass_field=driver.findElement(By.id("ConfirmPassword"));
-	confpass_field.sendKeys("shynasatheesh1234");
+	confpass_field.sendKeys(confirm_passsword);
 	WebElement reg=driver.findElement(By.id("register-button"));
 	reg.click();
 

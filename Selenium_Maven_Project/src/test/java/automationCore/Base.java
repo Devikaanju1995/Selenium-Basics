@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 public class Base
 {
@@ -40,9 +41,10 @@ public void initialisebrowser(String browsername)
 	driver.manage().window().maximize();
 }
 @BeforeMethod
-public void browserlaunch()
+@Parameters("browser")
+public void browserlaunch(String browsername)
 {
-	initialisebrowser("chrome");  //this.method but this is inbuild
+	initialisebrowser(browsername);  //this.method but this is inbuild
 }
 @AfterMethod
 public void closebrowser(ITestResult result) throws IOException

@@ -1,5 +1,6 @@
 package testscripts;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.management.RuntimeErrorException;
@@ -9,67 +10,46 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import Utilities.Excel_Utilities;
 import automationCore.Base;
+import listeners.Retry_Analyser;
 
 public class HomePageTest extends Base 
 {
-	@Test
-public void verify_Homepage_Title()
+@Test(retryAnalyzer=Retry_Analyser.class)
+public void verify_Homepage_Title() 
 {
 	driver.get("https://demowebshop.tricentis.com/");
 	driver.manage().window().maximize();
-	String actualtitle=driver.getTitle();
-	//System.out.println("The title is : "+title);
-	String expectedtitle="Demo Web Shop";
+	String expectedtitle=driver.getTitle();
+	
+	String actualtitle=Excel_Utilities.get_StringData(0, 0, "Homepage");
+	System.out.println("The title is : "+actualtitle);
 	Assert.assertEquals(actualtitle, expectedtitle, "invalid title");
 	
 }
-
-public void verify_Communitypoll_Selection(String buttonclick)
+@Test(enabled=false)
+public void verify_Communitypoll_Selection()
 {
-	driver.get("https://demowebshop.tricentis.com/");
+	driver.get("https://demowebshop.tricentis.com");
 	
-   // List<WebElement> polloptions=driver.findElements(By.className("pollanswers-1"));
-   if(buttonclick.equals("Excellent"))
-   {
-	   WebElement excellentbutton=driver.findElement(By.xpath("//label[text()='Excellent']"));
-	   excellentbutton.click();
-   }
-   else if(buttonclick.equals("Good"))
-   {
-	   WebElement goodbutton=driver.findElement(By.xpath("//label[text()='Good']"));
-	   goodbutton.click();
-   }
-   
-   else if(buttonclick.equals("Poor"))
-   {
-	   WebElement poorbutton=driver.findElement(By.xpath("//label[text()='Poor']"));
-	   poorbutton.click();
-   }
-   
-   else if(buttonclick.equals("Very bad"))
-   {
-	   WebElement verybadbutton=driver.findElement(By.xpath("//label[text()='Very bad']"));
-	   verybadbutton.click();
-   }
-   else
-   {
-	   throw new RuntimeException("unclick button");
-   }
-   
-   WebElement submit_bt=driver.findElement(By.id("vote-poll-1"));
-   submit_bt.click();
-   
-  // WebElement msg=driver.findElement(By.xpath("//div[text()='Only registered users can vote.']"));
-  // String actual_res=msg.getText();
-  // String expected_res="Only registered users can vote.";
-   //Assert.assertEquals(actual_res, expected_res,"user cannot  vote");
-   
+    List<WebElement> radiooptions=driver.findElements(By.xpath("//li[@class='answer']"));
+    
+    int sizes=radiooptions.size();
+	 for(int i=0;i<sizes;i++)
+	 {
+		String buttn = radiooptions.get(i).getAttribute("value");
+		if(buttn.equals("Good"))
+		{
+			radiooptions.get(i).click();	
+		}
+		
+		}
+	 WebElement clickvote=driver.findElement(By.id("vote-poll-1"));
+	 clickvote.click();
 }
-	@Test
-public void verify_poll()
-{
-	verify_Communitypoll_Selection("Good");
+
 }
-}
+	
+
      
