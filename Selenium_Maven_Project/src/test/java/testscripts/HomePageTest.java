@@ -16,7 +16,7 @@ import listeners.Retry_Analyser;
 
 public class HomePageTest extends Base 
 {
-@Test(retryAnalyzer=Retry_Analyser.class)
+@Test(retryAnalyzer=Retry_Analyser.class,groups="sanity")
 public void verify_Homepage_Title() 
 {
 	driver.get("https://demowebshop.tricentis.com/");
@@ -28,7 +28,7 @@ public void verify_Homepage_Title()
 	Assert.assertEquals(actualtitle, expectedtitle, "invalid title");
 	
 }
-@Test(enabled=false)
+@Test(enabled=true,groups="smoke")
 public void verify_Communitypoll_Selection()
 {
 	driver.get("https://demowebshop.tricentis.com");

@@ -13,7 +13,7 @@ import dataprovider.Data_Providers;
 
 public class LoginPageTest extends Base
 {
-	@Test
+	@Test(groups={"regression","sanity"})
 public void verify_UserLoginwith_Validcredential()
 {
 	driver.get("https://demowebshop.tricentis.com/login");

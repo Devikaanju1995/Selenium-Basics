@@ -19,7 +19,7 @@ public static String get_StringData(int row,int column,String sheet)
 	{
 		
 	
-	f=new FileInputStream("C:\\Users\\Sathish\\git\\Selenium-Basics\\Selenium_Maven_Project\\src\\test\\resources\\TestData.xlsx");
+	f=new FileInputStream("C:\\Users\\Sathish\\git\\Selenium-Basics\\Selenium_Maven_Project\\src\\test\\resources\\Testdata.xlsx");
 	w=new XSSFWorkbook(f); 
 	sh=w.getSheet(sheet);
 	Row r=sh.getRow(row);
@@ -36,7 +36,7 @@ public String get_IntegerData(int row,int column,String sheet)
 {
 	try
 	{
-	f=new FileInputStream("C:\\Users\\Sathish\\git\\Selenium-Basics\\Selenium_Maven_Project\\src\\test\\resources\\TestData.xlsx");
+	f=new FileInputStream("C:\\Users\\Sathish\\git\\Selenium-Basics\\Selenium_Maven_Project\\src\\test\\resources\\Testdata.xlsx");
 	w=new XSSFWorkbook(f); 
 	sh=w.getSheet(sheet);
 	Row r=sh.getRow(row);
